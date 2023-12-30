@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pp0alm?serverTimezone=GMT-5&allowMultiQueries=true # allow multi queries
+    username: root
+    password: 1234
+  mail:
+    host: smtp.qq.com
+    username: 2469262728@qq.com
+    password: gtgvqbvtyasgebdc
+    port: 465
+    protocol: smtp
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+            class: javax.net.ssl.SSLSocketFactory
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: wccurate7a7@gmail.com
+#    password: 18553538226@Qq
+#    properties:
+#      mail:
+#        smtp:
+#          auth: true
+#          ssl:
+#            enable: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

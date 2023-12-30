@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.ReserveMapper">
+    <resultMap id="BUIDResultMap" type="com.example.springboot.entity.Reserve">
+        <result property="bookUnityID" column="book_unity_id"/>
+    </resultMap>
+    <insert id="save">
+        insert into reserve(isbn,email,reservetime,duration)
+        values (#{isbn}, #{email}, #{reserveTime}, #{duration})
+    </insert>
+    <select id="getByEmailAndISBN" resultMap="BUIDResultMap">
+        select *
+        from reserve
+        where email=#{email} and isbn=#{isbn}
+    </select>
+    <select id="getByISBN" resultMap="BUIDResultMap">
+        select *
+        from reserve
+        where isbn = #{ isbn }
+    </select>
+    <delete id="deleteByReserveID">
+        delete from reserve
+        where id = #{id}
+    </delete>
+    <select id="listByCondition" resultMap="BUIDResultMap">
+        select *
+        from reserve
+        <where>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="isbn != null and isbn != ''">
+                and isbn = #{isbn}
+            </if>
+        </where>
+    </select>
+    <select id="listAll" resultMap="BUIDResultMap">
+        select *
+        from reserve
+    </select>
+    <update id="updateByReserveID">
+        update reserve
+        set book_unity_id=#{bookUnityID}
+        where id=#{id}
+    </update>
+</mapper>
