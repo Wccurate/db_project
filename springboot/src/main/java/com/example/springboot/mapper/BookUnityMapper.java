@@ -14,4 +14,5 @@ public interface BookUnityMapper {
     void UpdateByUnityID(BookUnity bu);
     BookUnity getByBookUnityID(Integer id);
     List<BookUnity> getByISBN(String isbn);
+    void deleteByBookUnityID(Integer id);
 }

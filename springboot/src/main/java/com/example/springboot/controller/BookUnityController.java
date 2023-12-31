@@ -38,6 +38,21 @@ public class BookUnityController {
     @GetMapping("/getBooks")
     public Result getBookUnities(@RequestParam String isbn){
         return Result.success(bookUnityService.getByISBN(isbn));
-        //return Result.success();
+    }
+    @PutMapping("/update")
+    public Result editBookUnity(@RequestBody BookUnity bookUnity){
+        bookUnityService.updateByBookUnityID(bookUnity);
+        return Result.success();
+    }
+    @DeleteMapping("/delete/{bookUnityID}")
+    public Result deleteBookUnity(@PathVariable Integer bookUnityID){
+        BookUnity bu = bookUnityService.getByBookUnityID(bookUnityID);
+        if(bu.getStatus()=="Available"){
+            Book book = bookService.getByISBN(bu.getIsbn());
+            book.setNumber(book.getNumber()-1);
+            bookService.sub_updateByISBN(book);
+        }
+        bookUnityService.deleteByBookUnityID(bookUnityID);
+        return Result.success();
     }
 }
