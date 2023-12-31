@@ -28,4 +28,8 @@
         from book_unity
         where isbn=#{isbn}
     </select>
+    <delete id="deleteByBookUnityID">
+        delete from book_unity
+        where id=#{id}
+    </delete>
 </mapper>

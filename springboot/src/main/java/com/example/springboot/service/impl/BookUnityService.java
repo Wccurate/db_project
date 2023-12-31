@@ -28,4 +28,26 @@ public class BookUnityService implements IBookUnityService {
     public List<BookUnity> getByISBN(String isbn){
         return mapper.getByISBN(isbn);
     }
+    @Override
+    public void updateByBookUnityID(BookUnity bu){
+        try{
+            mapper.UpdateByUnityID(bu);
+        }
+        catch(Exception e) {
+            throw new ServiceException("BookUnity update failed");
+        }
+    }
+    @Override
+    public BookUnity getByBookUnityID(Integer bookUnityID){
+        return mapper.getByBookUnityID(bookUnityID);
+    }
+    @Override
+    public void deleteByBookUnityID(Integer bookUnityID){
+        try{
+            mapper.deleteByBookUnityID(bookUnityID);
+        }
+        catch(Exception e){
+            throw new ServiceException("BookUnity delete failed");
+        }
+    }
 }
