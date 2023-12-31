@@ -23,4 +23,9 @@
         from book_unity
         where id=#{id}
     </select>
+    <select id="getByISBN" resultType="com.example.springboot.entity.BookUnity">
+        select *
+        from book_unity
+        where isbn=#{isbn}
+    </select>
 </mapper>

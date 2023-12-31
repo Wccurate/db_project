@@ -35,4 +35,9 @@ public class BookUnityController {
         }
         return Result.success();
     }
+    @GetMapping("/getBooks")
+    public Result getBookUnities(@RequestParam String isbn){
+        return Result.success(bookUnityService.getByISBN(isbn));
+        //return Result.success();
+    }
 }

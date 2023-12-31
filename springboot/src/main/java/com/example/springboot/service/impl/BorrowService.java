@@ -15,11 +15,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -85,7 +83,7 @@ public class BorrowService implements IBorrowService {
         if(Objects.isNull(book)) {
             throw new ServiceException("Book does not exist");
         }
-        List<BookUnity> bookUnities = bookUnityMapper.getBookUnityByISBN(isbn);
+        List<BookUnity> bookUnities = bookUnityMapper.getAvailableBookUnityByISBN(isbn);
         // 3. whether there is enough book
         if(book.getNumber() < 1 || bookUnities.isEmpty()) {
             throw new ServiceException("Insufficient quantity of the book");

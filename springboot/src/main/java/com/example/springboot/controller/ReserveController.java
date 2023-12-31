@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping("/reserve")
-public class ReserveController {
+public class
+ReserveController {
     @Autowired
     IReserveService reserveService;
     @Autowired
