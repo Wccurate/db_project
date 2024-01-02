@@ -56,6 +56,7 @@ public class BookService implements IBookService {
     }
     @Override
     public void updateByISBN(Book book) {
+        book = mapper.getByISBN(book.getIsbn());
         book.setUDate(new Date());
         book.setCategory(listToString(book.getCategories()));
         mapper.updateByISBN(book);

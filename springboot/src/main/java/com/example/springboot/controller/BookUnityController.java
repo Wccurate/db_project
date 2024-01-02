@@ -10,6 +10,8 @@ import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/bookUnity")
@@ -47,7 +49,7 @@ public class BookUnityController {
     @DeleteMapping("/delete/{bookUnityID}")
     public Result deleteBookUnity(@PathVariable Integer bookUnityID){
         BookUnity bu = bookUnityService.getByBookUnityID(bookUnityID);
-        if(bu.getStatus()=="Available"){
+        if(Objects.equals(bu.getStatus(), "Available")){
             Book book = bookService.getByISBN(bu.getIsbn());
             book.setNumber(book.getNumber()-1);
             bookService.sub_updateByISBN(book);
