@@ -37,8 +37,9 @@ public class BookUnityController {
         }
         return Result.success();
     }
-    @GetMapping("/getBooks")
-    public Result getBookUnities(@RequestParam String isbn){
+    @GetMapping("/getBooks/{isbn}")
+    public Result getBookUnities(@PathVariable String isbn)
+    {
         return Result.success(bookUnityService.getByISBN(isbn));
     }
     @PutMapping("/update")
