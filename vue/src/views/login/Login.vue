@@ -45,6 +45,7 @@ export default {
 
   methods: {
     login() {
+      console.log(this.admin)
       this.$refs['loginForm'].validate((valid) => {
         if(valid) {
           request.post('admin/login', this.admin).then(res => {

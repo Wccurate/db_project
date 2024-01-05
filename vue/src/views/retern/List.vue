@@ -14,7 +14,7 @@
         <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="150"></el-table-column>
         <el-table-column prop="username" label="Username" show-overflow-tooltip width="120"></el-table-column>
         <el-table-column prop="phone" label="Phone" width="100"></el-table-column>
-        <el-table-column prop="name" label="Book Name" show-overflow-tooltip width="450"></el-table-column>
+        <el-table-column prop="name" label="Book Name" show-overflow-tooltip width="200"></el-table-column>
         <el-table-column prop="isbn" label="ISBN" width="100"></el-table-column>
         <el-table-column prop="bstatus" label="Status" width="100"></el-table-column>
         <el-table-column prop="cdate" label="Borrow Date" width="120" :formatter="createDateFormat"></el-table-column>
@@ -75,7 +75,7 @@ export default {
 
   methods: {
     load() {
-      request.get('retern/page', {
+      request.get('return/page', {
         params: this.params
       }).then(res => {
         if(res.code === '200') {

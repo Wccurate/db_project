@@ -8,16 +8,15 @@
           <el-input v-model="form.isbn" placeholder="Enter isbn" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="Description: " style="margin-left: 2px;" prop="description">
-          <el-input style="width: 500px" type="textarea" v-model="form.description" placeholder="Enter description"></el-input>
+          <el-input style="width: 500px" type="textarea" v-model="form.description"
+            placeholder="Enter description"></el-input>
         </el-form-item>
         <el-form-item label="Name: " style="margin-left: 2px" prop="name">
           <el-input v-model="form.name" placeholder="Enter name"></el-input>
         </el-form-item>
         <el-form-item label="Category: " style="margin-left: 2px">
-          <el-cascader
-              :props="{value: 'name', label: 'name'}"
-              v-model="form.categories"
-              :options="categories"></el-cascader>
+          <el-cascader :props="{ value: 'name', label: 'name' }" v-model="form.categories"
+            :options="categories"></el-cascader>
         </el-form-item>
         <el-form-item label="Author: " style="margin-left: 2px" prop="author">
           <el-input v-model="form.author" placeholder="Enter last name"></el-input>
@@ -26,11 +25,7 @@
           <el-input v-model="form.publisher" placeholder="Enter publisher name"></el-input>
         </el-form-item>
         <el-form-item label="Publish Date: " style="margin-left: 2px" prop="publish_date">
-          <el-date-picker
-              v-model="form.publish_date"
-              type="date"
-              value-format="yyyy-MM-dd"
-              placeholder="Select a date">
+          <el-date-picker v-model="form.publish_date" type="date" value-format="yyyy-MM-dd" placeholder="Select a date">
           </el-date-picker>
         </el-form-item>
         <el-form-item id="credit" label="Score: " style="margin-left: 2px;" prop="credit">
@@ -45,7 +40,8 @@
       </el-form>
       <!-- button area -->
       <div style="text-align: center">
-        <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px" @click="save">Submit</el-button>
+        <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px"
+          @click="save">Submit</el-button>
       </div>
     </div>
   </div>
@@ -59,20 +55,20 @@ export default {
 
   data() {
     const checkNumeric = (rule, value, callback) => {
-      if(!value) {
+      if (!value) {
         callback(new Error('This blank cannot be empty'));
       }
-      if(!/^[0-9]*$/.test(value)) {
+      if (!/^[0-9]*$/.test(value)) {
         callback(new Error('Please enter a numerical value'))
       }
-      if(parseInt(value) < 0) {
+      if (parseInt(value) < 0) {
         callback(new Error('Please enter a number larger than 0'))
       }
       callback()
     };
 
     const checkISBN = (rule, value, callback) => {
-      if(!value) {
+      if (!value) {
         callback(new Error('Please enter the book\'s ISBN'))
       }
       if (!/^[0-9]{10}$/.test(value)) {
@@ -82,7 +78,8 @@ export default {
     }
 
     return {
-      form: {},
+      form: {
+      },
       categories: [],
       rules: {
         // cannot be empty
@@ -92,33 +89,40 @@ export default {
         publisher: [{ required: true, message: "Please enter the book's publisher", trigger: 'blur' }],
         publish_date: [{ required: true, message: "Please select a date", trigger: 'blur' }],
         // more restrictions
-        isbn: [{ required: true,  validator: checkISBN, trigger: 'blur' }],
-        number: [{ required: true,  validator: checkNumeric, trigger: 'blur' }],
-        credit: [{ required: true,  validator: checkNumeric, trigger: 'blur' }],
+        isbn: [{ required: true, validator: checkISBN, trigger: 'blur' }],
+        number: [{ required: true, validator: checkNumeric, trigger: 'blur' }],
+        credit: [{ required: true, validator: checkNumeric, trigger: 'blur' }],
       }
     }
   },
 
   created() {
     const isbn = this.$route.query.isbn
+    request.get('category/tree').then(res => {
+      this.categories = res.data
+      // console.log(this.categories)
+    })
+    // console.log(isbn)
     request.get("/book/" + isbn).then(res => {
       this.form = res.data
-      if(this.form.category) {
+      // console.log(this.form)
+      if (this.form.category) {
+        console.log(this.form.category)
         this.form.categories = this.form.category.split(' > ')
+        console.log(this.form.categories)
       }
     })
 
-    request.get('category/tree').then(res => {
-      this.categories = res.data
-    })
+    
   },
 
   methods: {
     save() {
       this.$refs['ruleForm'].validate((valid) => {
-        if(valid) {
+        if (valid) {
+          // console.log(this.form)
           request.put('book/update', this.form).then(res => {
-            if(res.code === '200') {
+            if (res.code === '200') {
               this.$notify.success('Updated')
               this.$router.push("/BookList")
             } else {
@@ -132,6 +136,4 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

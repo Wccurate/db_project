@@ -112,8 +112,11 @@ export default {
         if(res.code === '200') {
           this.tableData = res.data.list
           this.total = res.data.total
+          console.log(this.tableData)
         }
-      })
+      }
+      )
+
     },
 
     addChild(row) {

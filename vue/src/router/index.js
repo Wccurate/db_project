@@ -112,6 +112,21 @@ const routes = [
         path: 'reternList',
         name: 'reternList',
         component: () => import('@/views/retern/List')
+      },
+      {
+        path:'addReserve',
+        name:'addReserve',
+        component: () => import('@/views/reserve/Add')
+      },
+      {
+        path:'reserveList',
+        name:'reserveList',
+        component: () => import('@/views/reserve/List')
+      },
+      {
+        path:'test',
+        name:'test',
+        component: () => import('@/views/test/Test')
       }
     ]
   },
