@@ -1,56 +1,60 @@
 <template>
     <div style="padding: 10px;">
-        <div style="font-size: 40px; font-family: Arial; margin-bottom: 5px">Add New Reserve Record</div>
-        <div style=" width: 80%">
-            <!-- form area -->
-            <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm">
-                <el-form-item label="ISBN: " style="margin-left: 2px" prop="isbn">
-                    <el-select v-model="form.isbn" clearable filterable placeholder="Please select ISBN"
-                        @change="selectBook">
-                        <el-option v-for="item in books" :key="item.isbn" :label="item.isbn" :value="item.isbn">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Book Name: " style="margin-left: 2px" prop="name">
-                    <el-input v-model="form.name" placeholder="Enter book's name" disabled></el-input>
-                </el-form-item>
-                <el-form-item id="credit" label="Need Credit: " style="margin-left: 2px;" prop="credit">
-                    <el-input v-model="form.credit" placeholder="Enter credit" disabled></el-input>
-                </el-form-item>
-                <el-form-item id="number" label="Number: " style="margin-left: 2px;" prop="number">
-                    <el-input v-model="form.number" placeholder="Enter a number" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="User ID: " style="margin-left: 2px" prop="uid">
-                    <el-select v-model="form.email" clearable filterable placeholder="Please select an user ID"
-                        @change="selectUser">
-                        <el-option v-for="item in users" :key="item.email" :label="item.uid" :value="item.email">
-                        </el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="Phone: " style="margin-left: 2px" prop="phone">
-                    <el-input v-model="form.phone" placeholder="Enter phone number" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="Username: " style="margin-left: 2px" prop="username">
-                    <el-input v-model="form.username" placeholder="Enter username" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="Score Left: " style="margin-left: 2px" prop="acredit">
-                    <el-input v-model="form.acredit" placeholder="Enter score value" disabled></el-input>
-                </el-form-item>
-                <el-form-item label="Borrow Days: " style="margin-left: 2px" prop="duration">
-                    <template>
-                        <el-input-number v-model="form.duration" @change="handleChange" :min="1"
-                            :max="10"></el-input-number>
-                    </template>
-                </el-form-item>
+        <div style="font-size: 40px; font-family: Arial; margin-bottom: 5px; text-align: center; transform: translateX(-10%);">Add New Reserve Record</div>
+        <div class="formarea" style="width: 80%; margin: auto;">
+            <el-form :model="form" :rules="rules" ref="ruleForm">
+                <!-- 使用栅格系统分为两列 -->
+                <el-row :gutter="20">
+                    <el-col :span="12">
+                        <!-- 第一列的表单项 -->
+                        <el-form-item label="ISBN: " prop="isbn">
+                            <el-select v-model="form.isbn" clearable filterable placeholder="Please select ISBN" @change="selectBook" style="width: 100%;">
+                                <el-option v-for="item in books" :key="item.isbn" :label="item.isbn" :value="item.isbn" > 
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="Book Name: " prop="name">
+                            <el-input v-model="form.name" placeholder="Enter book's name" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="Need Credit: " prop="credit">
+                            <el-input v-model="form.credit" placeholder="Enter credit" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="Number: " prop="number">
+                            <el-input v-model="form.number" placeholder="Enter a number" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="Reserve Days: " prop="duration">
+                            <el-input-number v-model="form.duration" @change="handleChange" :min="1" :max="10"></el-input-number>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <!-- 第二列的表单项 -->
+                        <el-form-item label="User ID: " prop="uid" >
+                            <el-select v-model="form.email" clearable filterable placeholder="Please select an user ID" @change="selectUser" style="width: 100%;">
+                                <el-option v-for="item in users" :key="item.email" :label="item.uid" :value="item.email">
+                                </el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="Phone: " prop="phone">
+                            <el-input v-model="form.phone" placeholder="Enter phone number" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="Username: " prop="username">
+                            <el-input v-model="form.username" placeholder="Enter username" disabled></el-input>
+                        </el-form-item>
+                        <el-form-item label="Score Left: " prop="acredit">
+                            <el-input v-model="form.acredit" placeholder="Enter score value" disabled></el-input>
+                        </el-form-item>
+
+                    </el-col>
+                </el-row>
+                <!-- button area -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <el-button type="primary" @click="save">Submit</el-button>
+                </div>
             </el-form>
-            <!-- button area -->
-            <div style="text-align: center">
-                <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px"
-                    @click="save">Submit</el-button>
-            </div>
         </div>
     </div>
 </template>
+
   
 <script>
 import request from "@/utils/request";
@@ -179,4 +183,12 @@ export default {
 }
 </script>
   
-<style scoped></style>
+<style scoped>
+.formarea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  transform: translateX(-10%);
+}
+</style>

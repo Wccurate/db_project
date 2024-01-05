@@ -1,68 +1,72 @@
 <template>
-  <div style="padding: 10px;">
-    <div style="font-size: 40px; font-family: Arial; margin-bottom: 5px">Add New Book</div>
-    <div style="width: 60%">
-      <!-- form area -->
-      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm">
-        <el-form-item label="ISBN: " style="margin-left: 2px" prop="isbn">
-          <!-- <el-select v-model="form.isbn" clearable filterable placeholder="Please select ISBN" @change="selectBook">
-            <el-option
-                v-for="item in books"
-                :key="item.isbn"
-                :label="item.isbn"
-                :value="item.isbn">
-            </el-option>
-          </el-select> -->
-          <el-input v-model="form.isbn" placeholder="Enter isbn" @change="selectBook"></el-input>
-        </el-form-item>
-        <el-form-item label="Description: " style="margin-left: 2px;" prop="description">
-          <el-input style="width: 500px" type="textarea" v-model="form.description"
+  <div style="padding: 10px; display: flex; justify-content: center; flex-direction: column; align-items: center;">
+    <div
+      style="font-size: 40px; font-family: Arial; margin-bottom: 5px; text-align: center; transform: translateX(-35%);">
+      Add New Book
+    </div>
+
+    <div class="formarea" style="width: 60%">
+      <el-form :inline="false" :model="form" :rules="rules" ref="ruleForm">
+        <!-- divide into two columns -->
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <!-- first column -->
+            <el-form-item label="ISBN: " prop="isbn">
+              <el-input v-model="form.isbn" placeholder="Enter isbn" @change="selectBook"></el-input>
+            </el-form-item>
+            <el-form-item label="Name: " prop="name">
+              <el-input v-model="form.name" placeholder="Enter name"></el-input>
+            </el-form-item>
+            <el-form-item label="Author: " prop="author">
+              <el-input v-model="form.author" placeholder="Enter author"></el-input>
+            </el-form-item>
+            <el-form-item label="Publisher: " prop="publisher">
+              <el-input v-model="form.publisher" placeholder="Enter publisher name"></el-input>
+            </el-form-item>
+            <el-form-item label="Publish Date: " prop="publish_date">
+              <el-date-picker v-model="form.publish_date" type="date" value-format="yyyy-MM-dd"
+                placeholder="Select a date" style="width: 100%;"></el-date-picker>
+            </el-form-item>
+            <el-form-item label="Position: " prop="position" >
+              <el-select v-model="form.position" placeholder="请选择" style="width: 100%;">
+                <el-option label="流通室" value="流通室"></el-option>
+                <el-option label="阅览室" value="阅览室"></el-option>
+              </el-select>
+            </el-form-item>
+
+          </el-col>
+          <el-col :span="12">
+            <!-- second column -->
+
+            <el-form-item label="Category: ">
+              <el-cascader :props="{ value: 'name', label: 'name' }" v-model="form.categories" :options="categories"
+                style="width: 100%;"></el-cascader>
+            </el-form-item>
+            <el-form-item label="Score: " prop="credit">
+              <el-input v-model="form.credit" placeholder="Enter score value"></el-input>
+            </el-form-item>
+            <el-form-item label="Cover url: " prop="cover">
+              <el-input v-model="form.cover" placeholder="Enter cover url"></el-input>
+            </el-form-item>
+            <el-form-item label="Number: " prop="number ">
+              <el-input v-model="form.number" placeholder="1" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="Status: " prop="status">
+              <el-input v-model="form.status" placeholder="" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="Handler: " prop="handler ">
+              <el-input v-model="form.handler" placeholder=""></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="Description: " prop="description">
+          <el-input style="width: 100%" type="textarea" v-model="form.description"
             placeholder="Enter description"></el-input>
         </el-form-item>
-        <el-form-item label="Name: " style="margin-left: 2px" prop="name">
-          <el-input v-model="form.name" placeholder="Enter name"></el-input>
-        </el-form-item>
-        <el-form-item label="Category: " style="margin-left: 2px">
-          <el-cascader :props="{ value: 'name', label: 'name' }" v-model="form.categories"
-            :options="categories"></el-cascader>
-        </el-form-item>
-        <el-form-item label="Author: " style="margin-left: 2px" prop="author">
-          <el-input v-model="form.author" placeholder="Enter last name"></el-input>
-        </el-form-item>
-        <el-form-item label="Publisher: " style="margin-left: 2px" prop="publisher">
-          <el-input v-model="form.publisher" placeholder="Enter publisher name"></el-input>
-        </el-form-item>
-        <el-form-item label="Publish Date: " style="margin-left: 2px" prop="publish_date">
-          <el-date-picker v-model="form.publish_date" type="date" value-format="yyyy-MM-dd" placeholder="Select a date">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item id="credit" label="Score: " style="margin-left: 2px;" prop="credit">
-          <el-input v-model="form.credit" placeholder="Enter score value"></el-input>
-        </el-form-item>
-        <el-form-item id="cover" label="Cover url: " style="margin-left: 2px;" prop="cover">
-          <el-input v-model="form.cover" placeholder="Enter cover url"></el-input>
-        </el-form-item>
-        <el-form-item id="number" label="Number: " style="margin-left: 2px;" prop="number ">
-          <el-input v-model="form.number" placeholder="1" :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item id="position" label="Position: " style="margin-left: 2px;" prop="position">
-          <el-select v-model="form.position" placeholder="请选择">
-            <el-option label="流通室" value="流通室"></el-option>
-            <el-option label="阅览室" value="阅览室"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item id="status" label="Status: " style="margin-left: 2px;" prop="status">
-          <el-input v-model="form.status" placeholder="" :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item id="handler" label="handler: " style="margin-left: 2px;" prop="handler ">
-          <el-input v-model="form.handler" placeholder=""></el-input>
-        </el-form-item>
+        <div style="text-align: center; margin-top: 20px;">
+          <el-button type="primary" @click="save">Submit</el-button>
+        </div>
       </el-form>
-      <!-- button area -->
-      <div style="text-align: center">
-        <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px"
-          @click="save">Submit</el-button>
-      </div>
     </div>
   </div>
 </template>
@@ -168,4 +172,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.formarea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  transform: translateX(-10%);
+}
+
+</style>

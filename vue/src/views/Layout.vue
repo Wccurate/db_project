@@ -9,7 +9,7 @@
         <!-- <span style="margin-left: 20px; font-size: 40px; font-family: Arial">LIBRARY MANAGEMENT SYSTEM</span> -->
       </div>
       <!-- admins' info -->
-      <div style="flex: 1; text-align: right; margin-right: 70px; ">
+      <div style="flex: 1; text-align: right; margin-right: 1%; ">
         <el-dropdown style="cursor: pointer">
           <span class="el-dropdown-link">
             Welcome {{ admin.username }}
@@ -270,7 +270,8 @@ export default {
     // background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 
     // background-image:linear-gradient(315deg, #20bf55 0%, #01baef 74%);
-    background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+    //background-image: linear-gradient(60deg, #abecd6 0%, #fbed96 100%);
+    background-image:linear-gradient(0deg,#0098f0,#00f2c3);
 
     border-radius: 15px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
