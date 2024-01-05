@@ -2,10 +2,7 @@ package com.example.springboot.service.impl;
 
 import com.example.springboot.controller.request.BorrowPageRequest;
 import com.example.springboot.controller.request.ReservePageRequest;
-import com.example.springboot.entity.BookUnity;
-import com.example.springboot.entity.Borrow;
-import com.example.springboot.entity.Reserve;
-import com.example.springboot.entity.User;
+import com.example.springboot.entity.*;
 import com.example.springboot.exception.ServiceException;
 import com.example.springboot.mapper.*;
 import com.example.springboot.service.IReserveService;
@@ -103,6 +100,10 @@ public class ReserveService implements IReserveService {
                 if(r.getBookUnityID()!=-1){
                     BookUnity bu = bookUnityMapper.getByBookUnityID(r.getBookUnityID());
                     bu.setStatus("Available");
+                    bookUnityMapper.UpdateByUnityID(bu);
+                    Book book = bookMapper.getByISBN(bu.getIsbn());
+                    book.setNumber(book.getNumber() + 1);
+                    bookMapper.updateByISBN(book);
                 }
                 mapper.deleteByReserveID(r.getId());
             }

@@ -11,7 +11,7 @@
     <update id="updateByISBN">
         update book
         set name = #{name}, category = #{category}, description = #{description}, publish_date = #{publish_date},
-            author = #{author}, uDate = #{uDate}, cover = #{cover}, credit = #{credit}
+            author = #{author}, uDate = #{uDate}, cover = #{cover}, credit = #{credit} , number = #{number}
         where isbn = #{isbn}
     </update>
 

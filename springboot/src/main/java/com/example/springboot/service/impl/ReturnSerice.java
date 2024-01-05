@@ -92,6 +92,9 @@ public class ReturnSerice implements IReturnService {
         }
         if(!flag) {
             // book number increase
+            BookUnity bu1 = bookUnityMapper.getByBookUnityID(borrow.getBook_unity_id());
+            bu1.setStatus("Available");
+            bookUnityMapper.UpdateByUnityID(bu1);
             book.setNumber(book.getNumber() + 1);
             bookMapper.updateByISBN(book);
         }

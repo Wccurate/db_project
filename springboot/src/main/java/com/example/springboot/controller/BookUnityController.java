@@ -27,6 +27,7 @@ public class BookUnityController {
         if(bookService.checkByISBN(book.getIsbn())){
             book=bookService.getByISBN(book.getIsbn());
             book.setNumber(book.getNumber()+1);
+            System.out.println(book.getNumber());
             bookService.sub_updateByISBN(book);
             bookUnityService.save(bookUnity);
         }

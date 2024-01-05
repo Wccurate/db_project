@@ -28,9 +28,9 @@
                 placeholder="Select a date" style="width: 100%;"></el-date-picker>
             </el-form-item>
             <el-form-item label="Position: " prop="position" >
-              <el-select v-model="form.position" placeholder="请选择" style="width: 100%;">
-                <el-option label="流通室" value="流通室"></el-option>
-                <el-option label="阅览室" value="阅览室"></el-option>
+              <el-select v-model="form.position" placeholder="Please Choose" style="width: 100%;">
+                <el-option label="Circulation Room" value="Circulation Room"></el-option>
+                <el-option label="Reading Room" value="Reading Room"></el-option>
               </el-select>
             </el-form-item>
 
@@ -120,10 +120,10 @@ export default {
   },
   watch: {
     'form.position'(newValue) {
-      if (newValue === '流通室') {
-        this.form.status = 'available';
-      } else if (newValue === '阅览室') {
-        this.form.status = 'unavailable';
+      if (newValue === 'Circulation Room') {
+        this.form.status = 'Available';
+      } else if (newValue === 'Reading Room') {
+        this.form.status = 'Unavailable';
       }
     }
   },

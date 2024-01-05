@@ -88,4 +88,9 @@
         from borrow
         where book_unity_id=#{bu_id}
     </select>
+    <select id="getCurrentBorrowByEmail" resultType="com.example.springboot.entity.Borrow">
+        select *
+        from borrow
+        where email = #{email} and bstatus = "Borrowed"
+    </select>
 </mapper>

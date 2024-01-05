@@ -83,7 +83,7 @@ public class BorrowService implements IBorrowService {
         if(Objects.isNull(book)) {
             throw new ServiceException("Book does not exist");
         }
-        List<BookUnity> bookUnities = bookUnityMapper.getAvailableBookUnityByISBN(isbn);
+        List<BookUnity> bookUnities = bookUnityMapper.getBookUnityByISBN(isbn);
         // 3. whether there is enough book
         if(book.getNumber() < 1 || bookUnities.isEmpty()) {
             throw new ServiceException("Insufficient quantity of the book");
@@ -102,7 +102,7 @@ public class BorrowService implements IBorrowService {
         bookMapper.updateByISBN(book); // 5.4 update book
         borrow.setCDate(LocalDateTime.now()); // 5.5 generate borrow date
         borrow.setBStatus(DEFAULT_STATUS); // 5.6 set status
-        List<Borrow> totalBorrows = mapper.getByEmail(email); //
+        List<Borrow> totalBorrows = mapper.getCurrentBorrowByEmail(email); //
         if(totalBorrows.size()>=10){
             throw new ServiceException("Can't borrow more than 10 books");
         }

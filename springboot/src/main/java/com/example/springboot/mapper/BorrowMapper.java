@@ -20,6 +20,7 @@ public interface BorrowMapper {
     void updateByEmailAndISBN(Borrow borrow);
 
     void deleteByEmailAndISBN(String email, String isbn, Integer id);
+    List<Borrow> getCurrentBorrowByEmail(String email);
 
 
     List<Borrow> selectByEmailAndISBN(String email, String isbn);

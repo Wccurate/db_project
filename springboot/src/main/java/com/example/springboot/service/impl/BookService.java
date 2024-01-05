@@ -50,8 +50,6 @@ public class BookService implements IBookService {
     }
     @Override
     public void sub_save(Book book) {
-        //book.setCDate(new Date());
-        //book.setCategory(listToString(book.getCategories()));
         mapper.save(book);
     }
     @Override
@@ -64,7 +62,6 @@ public class BookService implements IBookService {
     @Override
     public void sub_updateByISBN(Book book) {
         book.setUDate(new Date());
-        //book.setCategory(listToString(book.getCategories()));
         mapper.updateByISBN(book);
     }
     @Override

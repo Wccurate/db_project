@@ -143,7 +143,7 @@ export default {
 
     bookReturn(row) {
       // console.log(row)
-      request.post('/retern/save', row).then(res => {
+      request.post('/return/save', row).then(res => {
         if (res.code === '200') {
           this.$notify.success('Book returned')
           location.reload()
