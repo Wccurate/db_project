@@ -15,6 +15,7 @@ public class Return {
     private String uid;
     private String username;
     private String phone;
+    private Integer credit; // book's credit
     // own data
     private Integer id;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss")
