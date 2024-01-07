@@ -51,7 +51,7 @@
     </select>
 
     <select id="listByCondition" resultType="com.example.springboot.entity.Return">
-        select r.*, b.name, p.username, p.phone, u.uid
+        select r.*, b.name, p.username, b.credit, p.phone, u.uid
         from reterns r, book b, person p, user u
         <where>
             r.email = p.email and r.isbn = b.isbn and r.email = u.email
