@@ -2,7 +2,7 @@
   <div class="all">
     <!-- header -->
     <div
-      style="height: 80px; line-height: 80px; background-color: #f5f6fa; width: 100%; margin-bottom: 2px; display: flex">
+      style="height: 80px; line-height: 80px; background-color: #f5f6fa; width: 100%; margin-bottom: 2px; display: flex ">
       <!-- logo and title -->
       <div style="width: 800px">
         <!-- <img src="@/assets/logo.png" alt="" style="width: 50px; height: 50px; position: relative; top: 15px; left: 10px"> -->
@@ -210,6 +210,7 @@ export default {
 <style lang="scss">
 .all {
   box-sizing: border-box;
+  
 }
 .el-dropdown{
   margin-right: 13px;

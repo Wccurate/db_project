@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- search area -->
-    <div style="margin-bottom: 2px; margin-top: 2px">
+    <div class="searcharea">
       <el-input v-model="params.name" placeholder="Enter book's name" style="width: 200px; margin-left: 2px"></el-input>
       <el-input v-model="params.isbn" placeholder="Enter ISBN" style="width: 200px; margin-left: 2px"></el-input>
       <el-button type="primary" style="margin-left: 2px; height: 40px" icon="el-icon-search"
@@ -10,9 +10,14 @@
         @click="reset">Reset</el-button>
     </div>
     <!-- table area -->
-    <div>
+    <div class="tablearea">
       <el-table :data="tableData" style="width: 100%" stripe>
-        <el-table-column prop="isbn" label="ISBN" width="90"></el-table-column>
+        <el-table-column prop="cover" label="Cover" width="100">
+          <template v-slot="scope1">
+            <el-image :src="scope1.row.cover" style="width: 60%; height: 60%"></el-image>
+          </template>
+        </el-table-column>
+        <el-table-column prop="isbn" label="ISBN" width="120"></el-table-column>
         <el-table-column prop="name" label="Name" show-overflow-tooltip width="120"></el-table-column>
         <el-table-column prop="category" label="Category" width="130"></el-table-column>
         <el-table-column prop="author" label="Author" width="100"></el-table-column>
@@ -21,16 +26,12 @@
         <el-table-column prop="description" label="Description" show-overflow-tooltip width="300"></el-table-column>
         <el-table-column prop="cDate" label="Create Date" width="110"></el-table-column>
         <el-table-column prop="uDate" label="Update Date" width="110"></el-table-column>
-        <el-table-column prop="cover" label="Cover" width="100">
-          <template v-slot="scope1">
-            <el-image :src="scope1.row.cover" style="width: 50%; height: 50%"></el-image>
-          </template>
-        </el-table-column>
+
         <el-table-column prop="credit" label="Score" width="85"></el-table-column>
         <el-table-column prop="number" label="Number" width="85">
 
         </el-table-column>
-        <el-table-column fixed="right" label="Operation" width="200">
+        <el-table-column fixed="right" label="Operation" width="250">
 
 
 
@@ -148,9 +149,32 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .el-tooltip__popper {
   max-width: 400px;
   /* modify the width of the popper */
 }
+
+.searcharea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px #ccc;
+  margin-bottom: 10px;
+  margin-top: 17px;
+  width: auto;
+}
+
+.tablearea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+  .el-table-column{
+    text-align: center;
+  }
+}
+
+
 </style>

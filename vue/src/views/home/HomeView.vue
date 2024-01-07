@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 10px;">
+  <div style="padding: 0px; ">
     <!-- date range selector -->
     <div>
       <el-select v-model="form.dateRange" placeholder="Select date range" @change="load">
@@ -12,9 +12,9 @@
       </el-select>
     </div>
     <!-- line chart area -->
-    <div style="margin-top: 10px">
-      <el-card>
-        <div id="lineChart" style="width: 100%; height: 700px"></div>
+    <div style="margin-top: 10px ">
+      <el-card >
+        <div id="lineChart" style="height: 600px"></div>
       </el-card>
     </div>
   </div>

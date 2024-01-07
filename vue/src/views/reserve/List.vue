@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- search area -->
-        <div style="margin-bottom: 2px; margin-top: 2px">
+        <div class="searcharea">
             <el-input v-model="params.email" placeholder="Enter email" style="width: 200px; margin-left: 2px"></el-input>
             <el-input v-model="params.isbn" placeholder="Enter book's isbn"
                 style="width: 200px; margin-left: 2px"></el-input>
@@ -11,26 +11,26 @@
                 @click="reset">Reset</el-button>
         </div>
         <!-- table area -->
-        <div>
+        <div class="tablearea">
             <el-table :data="tableData" style="width: 100%" stripe>
                 <el-table-column prop="id" label="ID" show-overflow-tooltip width="100"></el-table-column>
                 <el-table-column prop="isbn" label="ISBN" width="140"></el-table-column>
                 <el-table-column prop="email" label="email" width="200"></el-table-column>
-                <el-table-column prop="reserveTime" label="ReserveTime" width="110"
+                <el-table-column prop="reserveTime" label="ReserveTime" width="130"
                     :formatter="dueDateFormat"></el-table-column>
-                <el-table-column prop="duration" label="duration" width="100"></el-table-column>
-                <el-table-column prop="bookUnityID" label="status" width="200">
+                <el-table-column prop="duration" label="duration" width="120"></el-table-column>
+                <el-table-column prop="bookUnityID" label="status" width="80">
                     <template v-slot="scope1">
                         <el-tag :type="scope1.row.bookUnityID == '-1' ? 'warning' : 'success'">
-                            {{ scope1.row.bookUnityID == '-1' ? '不在架' : '在架上' }}
+                            {{ scope1.row.bookUnityID == '-1' ? 'Unavailable' : 'Available' }}
                         </el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column fixed="right" label="取书">
+                <el-table-column fixed="right" label="Get Book" width="100">
                     <template v-slot="scope2">
-                        <el-button type="primary" style="margin-left: 2px;" @click="getBook(scope2.row)"
+                        <el-button type="primary" style="margin-left: 0px;" @click="getBook(scope2.row)"
                             v-if="scope2.row.bookUnityID != '-1'">
-                            取书
+                            Get
                         </el-button>
                     </template>
                 </el-table-column>
@@ -94,10 +94,11 @@ export default {
                     this.total = res.data.total
                 }
             })
+            console.log(this.tableData)
         },
 
         del(row) {
-            console.log(this.tableData);
+            // console.log(this.tableData);
             const email = row.email
             const isbn = row.isbn
             const id = row.id
@@ -165,4 +166,28 @@ export default {
 }
 </script>
   
-<style scoped></style>
+<style scoped lang="scss">
+
+
+.searcharea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px #ccc;
+  margin-bottom: 10px;
+  margin-top: 17px;
+  width: auto;
+}
+
+.tablearea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+  .el-table-column{
+    text-align: center;
+  }
+}
+
+</style>

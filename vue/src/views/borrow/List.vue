@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- search area -->
-    <div style="margin-bottom: 2px; margin-top: 2px">
+    <div class="searcharea">
       <el-input v-model="params.username" placeholder="Enter username" style="width: 200px; margin-left: 2px"></el-input>
       <el-input v-model="params.name" placeholder="Enter book's name" style="width: 200px; margin-left: 2px"></el-input>
       <el-input v-model="params.isbn" placeholder="Enter book's isbn" style="width: 200px; margin-left: 2px"></el-input>
@@ -11,7 +11,7 @@
         @click="reset">Reset</el-button>
     </div>
     <!-- table area -->
-    <div>
+    <div class="tablearea">
       <el-table :data="tableData" style="width: 100%" stripe>
         <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="100"></el-table-column>
         <el-table-column prop="username" label="Username" show-overflow-tooltip width="100"></el-table-column>
@@ -22,7 +22,7 @@
         <el-table-column prop="cdate" label="Borrow Date" width="110" :formatter="createDateFormat"></el-table-column>
         <el-table-column prop="duration" label="Days" width="55"></el-table-column>
         <el-table-column prop="rdate" label="Due Date" width="110" :formatter="dueDateFormat"></el-table-column>
-        <el-table-column prop="notification" label="Notification">
+        <el-table-column prop="notification" label="Notification" width="120s">
           <template v-slot="scope1">
             <el-tag type="danger" v-if="scope1.row.notification === 'past due'">
               {{ scope1.row.notification }}
@@ -36,6 +36,13 @@
             <el-tag type="success" v-if="scope1.row.notification === 'before due'">
               {{ scope1.row.notification }}
             </el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="Fee" width="80">
+          <template v-slot="scope4">
+            <span :style="{ color: calculateFee(scope4.row).color }">
+              {{ calculateFee(scope4.row).fee }}
+            </span>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="Management">
@@ -105,10 +112,31 @@ export default {
         if (res.code === '200') {
           this.tableData = res.data.list
           this.total = res.data.total
+          console.log(this.tableData);
         }
       })
-    },
 
+    },
+    calculateFee(row) {
+      const today = moment();
+      const dueDate = moment(row.rdate);
+      const credit = row.credit; // 假设书籍的积分值在每行数据的credit字段中
+
+      if (today.isSame(dueDate, 'day')) {
+        // 当天归还
+        return { fee: `0`, color: 'green' };
+      } else if (today.isBefore(dueDate)) {
+        // 提前归还
+        const daysBefore = dueDate.diff(today, 'days');
+        const refund = credit * daysBefore;
+        return { fee: `+${refund}`, color: 'green' };
+      } else {
+        // 逾期归还
+        const daysOverdue = today.diff(dueDate, 'days');
+        const fine = credit * daysOverdue * 2;
+        return { fee: `-${fine}`, color: 'red' };
+      }
+    },
     del(row) {
       console.log(this.tableData);
       const email = row.email
@@ -178,4 +206,26 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.searcharea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px #ccc;
+  margin-bottom: 10px;
+  margin-top: 17px;
+  width: auto;
+}
+
+.tablearea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+
+  .el-table-column {
+    text-align: center;
+  }
+}
+</style>

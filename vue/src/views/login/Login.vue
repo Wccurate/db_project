@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100vh; overflow: hidden">
-    <div style="width: 500px; height: 400px; background-color: white; border-radius: 10px; padding: 50px; margin: 150px auto">
+    <div style="width: 500px; height: 400px; background-color: rgb(255, 255, 255); border-radius: 10px; padding: 50px; box-shadow: 0 0 10px #ccc; margin: 150px auto ">
       <!-- header -->
       <div style="margin-top: 50px; text-align: center; font-size: 40px; font-weight: bold; font-family: Arial; color: mediumblue">
         Sign in
