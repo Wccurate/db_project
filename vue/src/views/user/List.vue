@@ -1,15 +1,15 @@
 <template>
   <div>
     <!-- search area -->
-    <div style="margin-bottom: 2px; margin-top: 2px">
+    <div class="searcharea">
       <el-input v-model="params.email" placeholder="Enter user email" style="width: 200px; margin-left: 2px"></el-input>
       <el-input v-model="params.uid" placeholder="Enter user id" style="width: 200px; margin-left: 2px"></el-input>
       <el-button type="primary" style="margin-left: 2px; height: 40px" icon="el-icon-search" @click="load">Search</el-button>
       <el-button type="warning" style="margin-left: 2px; height: 40px" icon="el-icon-refresh-right" @click="reset">Reset</el-button>
     </div>
     <!-- table area -->
-    <div>
-      <el-table :data="tableData" style="width: 100%" stripe>
+    <div class="tablearea">
+      <el-table class="table" :data="tableData" style="width: 100%">
         <el-table-column prop="status" label="Status" width="80">
           <template v-slot="scope2">
             <el-switch
@@ -20,20 +20,20 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="130"></el-table-column>
+        <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="150"></el-table-column>
         <el-table-column prop="username" label="Username" show-overflow-tooltip width="100"></el-table-column>
         <el-table-column prop="fname" label="First Name" width="100"></el-table-column>
         <el-table-column prop="lname" label="Last Name" width="100"></el-table-column>
         <el-table-column prop="age" label="Age" width="50"></el-table-column>
-        <el-table-column prop="email" label="Email" show-overflow-tooltip width="150"></el-table-column>
+        <el-table-column prop="email" label="Email" show-overflow-tooltip width="180"></el-table-column>
         <el-table-column prop="phone" label="Phone" width="110"></el-table-column>
-        <el-table-column prop="province" label="Province/State" width="95"></el-table-column>
+        <el-table-column prop="province" label="Address" width="100"></el-table-column>
         <el-table-column prop="city" label="City" show-overflow-tooltip width="80"></el-table-column>
         <el-table-column prop="street" label="Street" show-overflow-tooltip width="100"></el-table-column>
-        <el-table-column prop="ctime" label="Create Date" width="120"></el-table-column>
-        <el-table-column prop="utime" label="Update Date" width="120"></el-table-column>
-        <el-table-column prop="acredit" label="Score" width="70"></el-table-column>
-        <el-table-column fixed="right" label="Operations" width="265">
+        <!-- <el-table-column prop="ctime" label="Create Date" width="120"></el-table-column>
+        <el-table-column prop="utime" label="Update Date" width="120"></el-table-column> -->
+        <el-table-column prop="acredit" label="Score" width="80"></el-table-column>
+        <el-table-column fixed="right" label="Operations" width="280">
           <template v-slot="scope">
             <el-button type="success" @click="chargeOpen(scope.row)">Reharge</el-button>
             <el-button type="primary" style="margin-left: 2px;" @click="$router.push('/editUser?email=' + scope.row.email)">Edit</el-button>
@@ -224,6 +224,29 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+.searcharea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px #ccc;
+  margin-bottom: 10px;
+  margin-top: 17px;
+  width: auto;
+}
+
+.tablearea {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px #ccc;
+  text-align: center;
+  .el-table-column{
+    text-align: center;
+  }
+}
+
+
 
 </style>

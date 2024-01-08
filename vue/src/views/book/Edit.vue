@@ -1,51 +1,63 @@
 <template>
-  <div style="padding: 10px;">
-    <div style="font-size: 40px; font-family: Arial; margin-bottom: 5px">Edit Book</div>
-    <div style="width: 60%">
-      <!-- form area -->
-      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm">
-        <el-form-item label="ISBN: " style="margin-left: 2px" prop="isbn">
-          <el-input v-model="form.isbn" placeholder="Enter isbn" :disabled="true"></el-input>
-        </el-form-item>
-        <el-form-item label="Description: " style="margin-left: 2px;" prop="description">
-          <el-input style="width: 500px" type="textarea" v-model="form.description"
-            placeholder="Enter description"></el-input>
-        </el-form-item>
-        <el-form-item label="Name: " style="margin-left: 2px" prop="name">
-          <el-input v-model="form.name" placeholder="Enter name"></el-input>
-        </el-form-item>
-        <el-form-item label="Category: " style="margin-left: 2px">
-          <el-cascader :props="{ value: 'name', label: 'name' }" v-model="form.categories"
-            :options="categories"></el-cascader>
-        </el-form-item>
-        <el-form-item label="Author: " style="margin-left: 2px" prop="author">
-          <el-input v-model="form.author" placeholder="Enter last name"></el-input>
-        </el-form-item>
-        <el-form-item label="Publisher: " style="margin-left: 2px" prop="publisher">
-          <el-input v-model="form.publisher" placeholder="Enter publisher name"></el-input>
-        </el-form-item>
-        <el-form-item label="Publish Date: " style="margin-left: 2px" prop="publish_date">
-          <el-date-picker v-model="form.publish_date" type="date" value-format="yyyy-MM-dd" placeholder="Select a date">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item id="credit" label="Score: " style="margin-left: 2px;" prop="credit">
-          <el-input v-model="form.credit" placeholder="Enter score value"></el-input>
-        </el-form-item>
-        <el-form-item id="cover" label="Cover url: " style="margin-left: 2px;" prop="cover">
-          <el-input v-model="form.cover" placeholder="Enter cover url"></el-input>
-        </el-form-item>
-        <el-form-item id="number" label="Number: " style="margin-left: 2px;" prop="number">
-          <el-input v-model="form.number" placeholder="Enter number"></el-input>
-        </el-form-item>
-      </el-form>
-      <!-- button area -->
-      <div style="text-align: center">
-        <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px"
-          @click="save">Submit</el-button>
+  <div>
+    <div class="wrapper">
+      <div class="fontarea">Edit Book</div>
+      <div class="formarea">
+        <!-- Form area -->
+        <el-form :model="form" :rules="rules" ref="ruleForm">
+          <el-row :gutter="20">
+            <el-col :span="12">
+              <!-- First column form items -->
+              <el-form-item label="ISBN: " prop="isbn">
+                <el-input v-model="form.isbn" placeholder="Enter isbn" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="Name: " prop="name">
+                <el-input v-model="form.name" placeholder="Enter name"></el-input>
+              </el-form-item>
+              <el-form-item label="Author: " prop="author">
+                <el-input v-model="form.author" placeholder="Enter author"></el-input>
+              </el-form-item>
+              <el-form-item label="Publisher: " prop="publisher">
+                <el-input v-model="form.publisher" placeholder="Enter publisher name"></el-input>
+              </el-form-item>
+              <el-form-item label="Publish Date: " prop="publish_date">
+                <el-date-picker v-model="form.publish_date" type="date" value-format="yyyy-MM-dd"
+                  placeholder="Select a date" style="width: 100%;"></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <!-- Second column form items -->
+
+              <el-form-item label="Category: " prop="category">
+                <el-cascader :props="{ value: 'name', label: 'name' }" v-model="form.categories"
+                  :options="categories" style="width: 100%;"></el-cascader>
+              </el-form-item>
+              <el-form-item label="Score: " prop="credit">
+                <el-input v-model="form.credit" placeholder="Enter score value"></el-input>
+              </el-form-item>
+              <el-form-item label="Cover url: " prop="cover">
+                <el-input v-model="form.cover" placeholder="Enter cover url"></el-input>
+              </el-form-item>
+              <el-form-item label="Number: " prop="number">
+                <el-input v-model="form.number" placeholder="Enter number"></el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-form-item label="Description: " prop="description">
+            <el-input type="textarea" v-model="form.description" placeholder="Enter description"
+              style="width: 100%;"></el-input>
+          </el-form-item>
+          <!-- Button area -->
+          <div style="text-align: center; margin-top: 20px;">
+            <el-button type="primary" @click="save">Submit</el-button>
+          </div>
+
+        </el-form>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import request from "@/utils/request";
@@ -113,7 +125,7 @@ export default {
       }
     })
 
-    
+
   },
 
   methods: {
@@ -136,4 +148,34 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+.wrapper {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(-10%);
+}
+
+.formarea {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  padding-top: 0px;
+}
+
+.fontarea {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.el-form {
+  width: 70%;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+</style>
