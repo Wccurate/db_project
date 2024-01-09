@@ -45,7 +45,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Management">
+        <el-table-column  label="Management" width="110">
           <template v-slot="scope2">
             <el-button type="primary" style="margin-left: 2px;" @click="bookReturn(scope2.row)"
               v-if="scope2.row.bstatus === 'Borrowed'">
@@ -53,7 +53,7 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Operation">
+        <el-table-column label="Operation" width="110">
           <template v-slot="scope">
             <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
               title="Are you sure you want to delete this row of data？" @confirm="del(scope.row)">
@@ -61,7 +61,7 @@
             </el-popconfirm>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="SendEmail">
+        <el-table-column  label="SendEmail" width="110">
           <template v-slot="scope3">
             <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
               title="Are you sure you want to delete this row of data？" @confirm="sendEmail(scope3.row)">

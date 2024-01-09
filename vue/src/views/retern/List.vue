@@ -30,7 +30,7 @@
             </span>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Operation" width="110" >
+        <el-table-column  label="Operation" width="110" >
           <template v-slot="scope">
             <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
               title="Are you sure you want to delete this row of data？" @confirm="del(scope.row)">
