@@ -10,7 +10,7 @@
         @click="reset">Reset</el-button>
     </div>
     <!-- table area -->
-    <div class="tablearea">
+    <div class="tablearea">https://www.acwing.com/problem/content/solution/1219/1/
       <el-table :data="tableData" style="width: 100%" stripe>
         <el-table-column prop="cover" label="Cover" width="100">
           <template v-slot="scope1">
@@ -31,7 +31,7 @@
         <el-table-column prop="number" label="Number" width="85">
 
         </el-table-column>
-        <el-table-column fixed="right" label="Operation" width="250">
+        <el-table-column label="Operation" width="300">
 
 
 

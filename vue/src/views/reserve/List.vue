@@ -26,7 +26,7 @@
                         </el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column fixed="right" label="Get Book" width="100">
+                <el-table-column  label="Get Book" width="100">
                     <template v-slot="scope2">
                         <el-button type="primary" style="margin-left: 0px;" @click="getBook(scope2.row)"
                             v-if="scope2.row.bookUnityID != '-1'">
