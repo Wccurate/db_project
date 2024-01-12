@@ -109,7 +109,7 @@ export default {
         credit: [{ required: true, message: "Please enter the book's credit", trigger: 'blur' }],
         // more restrictions
         email: [{ required: true, validator: checkEmail, trigger: 'blur' }],
-        phone: [{ required: true, validator: checkPhone, trigger: 'blur' }],
+        phone: [{ required: true, trigger: 'blur' }],
         isbn: [{ required: true, validator: checkISBN, trigger: 'blur' }],
       }
     }

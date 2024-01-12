@@ -10,7 +10,7 @@
         @click="reset">Reset</el-button>
     </div>
     <!-- table area -->
-    <div class="tablearea">https://www.acwing.com/problem/content/solution/1219/1/
+    <div class="tablearea">
       <el-table :data="tableData" style="width: 100%" stripe>
         <el-table-column prop="cover" label="Cover" width="100">
           <template v-slot="scope1">
@@ -31,7 +31,7 @@
         <el-table-column prop="number" label="Number" width="85">
 
         </el-table-column>
-        <el-table-column label="Operation" width="300">
+        <el-table-column label="Operation" width="350">
 
 
 
@@ -41,12 +41,12 @@
             </el-button>
 
             <el-dialog style="text-align: center" :visible.sync="dialogVisible" append-to-body>
-              <el-table :data="dialogTableData" style="width: 100%">
-                <el-table-column prop="id" label="ID"></el-table-column>
-                <el-table-column prop="position" label="Position"></el-table-column>
-                <el-table-column prop="status" label="Status"></el-table-column>
-                <el-table-column prop="handler" label="Handler"></el-table-column>
-                <el-table-column prop="isbn" label="ISBN"></el-table-column>
+              <el-table :data="dialogTableData" >
+                <el-table-column prop="id" label="ID" ></el-table-column>
+                <el-table-column prop="position" label="Position" ></el-table-column>
+                <el-table-column prop="status" label="Status" ></el-table-column>
+                <el-table-column prop="handler" label="Handler" ></el-table-column>
+                <el-table-column prop="isbn" label="ISBN" ></el-table-column>
               </el-table>
             </el-dialog>
 
@@ -175,6 +175,4 @@ export default {
     text-align: center;
   }
 }
-
-
 </style>
