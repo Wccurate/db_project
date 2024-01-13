@@ -46,7 +46,10 @@
                     <template v-slot="scope3">
                         <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
                             title="Send Email?" @confirm="sendEmail(scope3.row)">
-                            <el-button style="margin-left: 2px;" slot="reference" type="danger">Send</el-button>
+                            <el-button style="margin-left: 2px;" slot="reference" type="danger"
+                                       v-if="scope3.row.bookUnityID != '-1'">
+                              Send
+                            </el-button>
                         </el-popconfirm>
                     </template>
                 </el-table-column>
