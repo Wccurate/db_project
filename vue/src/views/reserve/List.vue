@@ -42,10 +42,10 @@
                         </el-popconfirm>
                     </template>
                 </el-table-column> -->
-                <el-table-column fixed="right" label="SendEmail">
+                <el-table-column  label="SendEmail" width="110">
                     <template v-slot="scope3">
                         <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
-                            title="Are you sure you want to delete this row of data？" @confirm="sendEmail(scope3.row)">
+                            title="Send Email?" @confirm="sendEmail(scope3.row)">
                             <el-button style="margin-left: 2px;" slot="reference" type="danger">Send</el-button>
                         </el-popconfirm>
                     </template>

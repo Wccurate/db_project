@@ -15,37 +15,51 @@
       <el-table :data="tableData" style="width: 100%" stripe>
         <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="100"></el-table-column>
         <el-table-column prop="username" label="Username" show-overflow-tooltip width="100"></el-table-column>
-        <el-table-column prop="phone" label="Phone" width="100"></el-table-column>
+        <el-table-column prop="phone" label="Phone" width="120"></el-table-column>
         <el-table-column prop="name" label="Book Name" show-overflow-tooltip width="100"></el-table-column>
-        <el-table-column prop="isbn" label="ISBN" width="100"></el-table-column>
-        <el-table-column prop="bstatus" label="Status" width="80"></el-table-column>
+        <el-table-column prop="isbn" label="ISBN" width="120"></el-table-column>
+        <el-table-column prop="bstatus" label="Status" width="100">
+          <template v-slot="scope0">
+            <el-tag type="warning" v-if="scope0.row.bstatus === 'Borrowed'">
+              {{ scope0.row.bstatus }}
+            </el-tag>
+            <el-tag type="success" v-else-if="scope0.row.bstatus === 'Returned'">
+              {{ scope0.row.bstatus }}
+            </el-tag>
+          </template>
+
+        </el-table-column>
         <el-table-column prop="cdate" label="Borrow Date" width="110" :formatter="createDateFormat"></el-table-column>
         <el-table-column prop="duration" label="Days" width="55"></el-table-column>
         <el-table-column prop="rdate" label="Due Date" width="110" :formatter="dueDateFormat"></el-table-column>
         <el-table-column prop="notification" label="Notification" width="120s">
           <template v-slot="scope1">
-            <el-tag type="danger" v-if="scope1.row.notification === 'past due'">
+            <el-tag type="success" v-if="scope1.row.bstatus === 'Returned'">
+              Returned
+            </el-tag>
+            <el-tag type="danger" v-else-if="scope1.row.notification === 'past due'">
               {{ scope1.row.notification }}
             </el-tag>
-            <el-tag type="primary" v-if="scope1.row.notification === 'almost due'">
+            <el-tag type="primary" v-else-if="scope1.row.notification === 'almost due'">
               {{ scope1.row.notification }}
             </el-tag>
-            <el-tag type="warning" v-if="scope1.row.notification === 'at the due date'">
+            <el-tag type="warning" v-else-if="scope1.row.notification === 'at the due date'">
               {{ scope1.row.notification }}
             </el-tag>
-            <el-tag type="success" v-if="scope1.row.notification === 'before due'">
+            <el-tag type="success" v-else-if="scope1.row.notification === 'before due'">
               {{ scope1.row.notification }}
             </el-tag>
           </template>
+
         </el-table-column>
-        <el-table-column label="Fee" width="80">
+        <el-table-column label="Credit" width="80">
           <template v-slot="scope4">
             <span :style="{ color: calculateFee(scope4.row).color }">
               {{ calculateFee(scope4.row).fee }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Management">
+        <el-table-column label="Management" width="110">
           <template v-slot="scope2">
             <el-button type="primary" style="margin-left: 2px;" @click="bookReturn(scope2.row)"
               v-if="scope2.row.bstatus === 'Borrowed'">
@@ -53,7 +67,7 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Operation">
+        <el-table-column label="Operation" width="110">
           <template v-slot="scope">
             <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
               title="Are you sure you want to delete this row of data？" @confirm="del(scope.row)">
@@ -61,10 +75,10 @@
             </el-popconfirm>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="SendEmail">
+        <el-table-column label="SendEmail" width="110">
           <template v-slot="scope3">
-            <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
-              title="Are you sure you want to delete this row of data？" @confirm="sendEmail(scope3.row)">
+            <el-popconfirm confirm-button-text='Yes' cancel-button-text='No' title="Send Email？"
+              @confirm="sendEmail(scope3.row)">
               <el-button style="margin-left: 2px;" slot="reference" type="danger">Send</el-button>
             </el-popconfirm>
           </template>
@@ -121,7 +135,9 @@ export default {
       const today = moment();
       const dueDate = moment(row.rdate);
       const credit = row.credit; // 假设书籍的积分值在每行数据的credit字段中
-
+      if (row.bstatus === 'Returned') {
+        return { fee: ``, color: 'green' };
+      }
       if (today.isSame(dueDate, 'day')) {
         // 当天归还
         return { fee: `0`, color: 'green' };
