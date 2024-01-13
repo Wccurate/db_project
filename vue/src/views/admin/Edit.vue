@@ -72,7 +72,7 @@ export default {
       if (!value) {
         callback(new Error('Please enter the phone number'))
       }
-      if (!/^[1,2,3,4,5,6,7,8,9][0-9]{9}$/.test(value)) {
+      if (!/^[1,2,3,4,5,6,7,8,9][0-9]{10}$/.test(value)) {
         callback(new Error('Illegal phone number'));
       }
       callback()
