@@ -37,10 +37,10 @@
       <el-dialog style="text-align: center" :visible.sync="dialogFormVisible">
         <div style="font-size: 30px; font-family: Arial; font-weight: bold">New Child Category</div>
         <el-form :model="form" :rules="rules" ref="ruleForm" style="margin-top: 5px; width: 80vh;">
-          <el-form-item label="Category Name: " :label-width="formLabelWidth" prop="name">
+          <el-form-item label="Category Name: " :label-width="formLabelWidth" prop="name" style="width: 80%;">
             <el-input v-model="form.name" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="Remark: " :label-width="formLabelWidth" prop="remark">
+          <el-form-item label="Remark: " :label-width="formLabelWidth" prop="remark" style="width: 80%;">
             <el-input v-model="form.remark" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>
