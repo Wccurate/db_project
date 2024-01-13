@@ -1,25 +1,25 @@
 <template>
-  <div style="padding: 20px; display: flex; justify-content: center; align-items: center; height: 100%;">
-    <div style="width: 60%; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; color: white">
-      <div
-        style="font-size: 40px; font-family: 'Open Sans', sans-serif; color: #333; margin-bottom: 20px; text-align: center;">
-        Add Parent Category</div>
-      <el-form :model="form" :rules="rules" ref="ruleForm" style="width: 100%;">
-        <el-form-item label="Category Name: " prop="name" style="width: 100%;">
-          <el-input v-model="form.name" placeholder="Enter name" style="width: 100%;"></el-input>
+  <div style="padding: 10px;">
+    <div>
+      <div style="font-size: 40px; font-family: Arial; margin-bottom: 5px">Add Parent Category</div>
+    </div>
+
+    <div style="width: 60%; margin-top: 2px">
+      <el-form :inline="true" :model="form" :rules="rules" ref="ruleForm">
+        <el-form-item label="Category Name: " style="margin-left: 2px" prop="name">
+          <el-input v-model="form.name" placeholder="Enter name"></el-input>
         </el-form-item>
-        <el-form-item label="Category Remark:  " prop="remark" style="width: 100%;">
-          <el-input v-model="form.remark" placeholder="Enter remark" style="width: 100%;"></el-input>
+        <el-form-item label="Remark: " style="margin-left: 2px" prop="remark">
+          <el-input v-model="form.remark" placeholder="Enter remark"></el-input>
         </el-form-item>
       </el-form>
 
-      <div style="text-align: center; margin-top: 20px;">
-        <el-button type="primary"
-          style="height: 40px; min-width: 100px; border-radius: 5px; font-family: 'Open Sans', sans-serif;"
-          @click="save">Submit</el-button>
+      <div style="text-align: center">
+        <el-button type="primary" style="margin-left: 2px; height: 40px; min-width: 100px" @click="save">Submit</el-button>
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -41,9 +41,9 @@ export default {
   methods: {
     save() {
       this.$refs['ruleForm'].validate((valid) => {
-        if (valid) {
+        if(valid) {
           request.post('category/save', this.form).then(res => {
-            if (res.code === '200') {
+            if(res.code === '200') {
               this.$notify.success('Submitted')
               this.$refs['ruleForm'].resetFields()
             } else {
@@ -57,15 +57,6 @@ export default {
 }
 </script>
 
-<style>
-/* 通用CSS样式 */
-body {
-  font-family: 'Open Sans', sans-serif;
-}
+<style scoped>
 
-/* 按钮悬停效果 */
-.el-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
-}
 </style>

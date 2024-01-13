@@ -15,22 +15,22 @@
       <el-table :data="tableData" style="width: 100%" stripe>
         <el-table-column prop="uid" label="User ID" show-overflow-tooltip width="150"></el-table-column>
         <el-table-column prop="username" label="Username" show-overflow-tooltip width="120"></el-table-column>
-        <el-table-column prop="phone" label="Phone" width="111"></el-table-column>
+        <el-table-column prop="phone" label="Phone" width="100"></el-table-column>
         <el-table-column prop="name" label="Book Name" show-overflow-tooltip width="200"></el-table-column>
-        <el-table-column prop="isbn" label="ISBN" width="110"></el-table-column>
+        <el-table-column prop="isbn" label="ISBN" width="100"></el-table-column>
         <el-table-column prop="bstatus" label="Status" width="100"></el-table-column>
         <el-table-column prop="cdate" label="Borrow Date" width="120" :formatter="createDateFormat"></el-table-column>
         <el-table-column prop="duration" label="Days" width="100"></el-table-column>
         <el-table-column prop="rdate" label="Due Date" width="100" :formatter="dueDateFormat"></el-table-column>
         <el-table-column prop="adate" label="Return Date" width="110" :formatter="returnDateFormat"></el-table-column>
-        <el-table-column label="Credit" width="100" >
+        <el-table-column label="Fee" width="100" >
           <template v-slot="scope">
             <span :style="{ color: calculateFee(scope.row).color }">
               {{ calculateFee(scope.row).fee }}
             </span>
           </template>
         </el-table-column>
-        <el-table-column  label="Operation" width="110" >
+        <el-table-column fixed="right" label="Operation" width="110" >
           <template v-slot="scope">
             <el-popconfirm confirm-button-text='Yes' cancel-button-text='No'
               title="Are you sure you want to delete this row of data？" @confirm="del(scope.row)">

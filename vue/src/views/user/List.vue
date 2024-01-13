@@ -33,7 +33,7 @@
         <!-- <el-table-column prop="ctime" label="Create Date" width="120"></el-table-column>
         <el-table-column prop="utime" label="Update Date" width="120"></el-table-column> -->
         <el-table-column prop="acredit" label="Score" width="80"></el-table-column>
-        <el-table-column  label="Operations" width="280">
+        <el-table-column fixed="right" label="Operations" width="280">
           <template v-slot="scope">
             <el-button type="success" @click="chargeOpen(scope.row)">Reharge</el-button>
             <el-button type="primary" style="margin-left: 2px;" @click="$router.push('/editUser?email=' + scope.row.email)">Edit</el-button>
@@ -52,13 +52,13 @@
       <el-dialog style="text-align: center" :visible.sync="dialogFormVisible">
         <div style="font-size: 30px; font-family: Arial; font-weight: bold">Charge Up User's Account</div>
         <el-form :model="form" :rules="rules" ref="ruleForm" style="margin-top: 15px; width: 80vh;">
-          <el-form-item label="User email: " :label-width="formLabelWidth" prop="name" style="width: 80%;">
+          <el-form-item label="User email: " :label-width="formLabelWidth" prop="name">
             <el-input v-model="form.email" disabled autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="Current credit: " :label-width="formLabelWidth" prop="name" style="width: 80%;">
+          <el-form-item label="Current credit: " :label-width="formLabelWidth" prop="name">
             <el-input v-model="form.acredit" disabled autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="Charge amount: " :label-width="formLabelWidth" prop="charge" style="width: 80%;">
+          <el-form-item label="Charge amount: " :label-width="formLabelWidth" prop="charge">
             <el-input v-model="form.charge" autocomplete="off"></el-input>
           </el-form-item>
         </el-form>

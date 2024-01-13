@@ -71,6 +71,7 @@ public class ReturnSerice implements IReturnService {
         Integer id = borrow.getId();
         borrow = borrowMapper.getByEmailAndISBN(email, isbn, id);
         List<Reserve> reserves = reserveMapper.getByISBN(isbn);
+        System.out.println(reserves);
         // verify the borrow record
         try {
             borrowMapper.getByEmailAndISBN(email, isbn, id);
@@ -84,7 +85,7 @@ public class ReturnSerice implements IReturnService {
         boolean flag = false;
         Reserve reserve=null;
         for(Reserve r:reserves){
-            if(borrowMapper.getByEmail(r.getEmail()).size()<10 && ChronoUnit.DAYS.between(r.getReserveTime(), LocalDateTime.now())<=10){
+            if(borrowMapper.getCurrentBorrowByEmail(r.getEmail()).size()<10 && ChronoUnit.DAYS.between(r.getReserveTime(), LocalDateTime.now())<=10){
                 flag=true;
                 reserve=r;
                 break;
