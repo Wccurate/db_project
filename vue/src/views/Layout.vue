@@ -30,13 +30,13 @@
         <el-dialog style="text-align: center" :visible.sync="dialogFormVisible">
           <div style="font-size: 30px; font-family: Arial; font-weight: bold">Change Password</div>
           <el-form :model="form" :rules="rules" ref="ruleForm" style="margin-top: 2px; width: 80vh;">
-            <el-form-item label="Original Password: " :label-width="formLabelWidth" prop="password">
+            <el-form-item label="Original Password: " :label-width="formLabelWidth" prop="password" style="width:80%"> 
               <el-input v-model="form.password" show-password autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item label="New Password: " :label-width="formLabelWidth" prop="newPassword">
+            <el-form-item label="New Password: " :label-width="formLabelWidth" prop="newPassword" style="width:80%">
               <el-input v-model="form.newPassword" show-password autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item label="Comfirm New Password: " :label-width="formLabelWidth" prop="confirmPassword">
+            <el-form-item label="Comfirm New Password: " :label-width="formLabelWidth" prop="confirmPassword" style="width:80%">
               <el-input v-model="form.confirmPassword" show-password autocomplete="off"></el-input>
             </el-form-item>
           </el-form>

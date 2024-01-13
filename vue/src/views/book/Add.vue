@@ -54,7 +54,7 @@
                 <el-input v-model="form.status" placeholder="" :disabled="true"></el-input>
               </el-form-item>
               <el-form-item label="Handler: " prop="handler">
-                <el-select v-model="form.handler" clearable filterable placeholder="Please select admin"
+                <el-select v-model="form.handler" clearable filterable placeholder="Please select admin" 
                   style="width: 100%;">
                   <el-option v-for="item in admin" :key="item.email" :label="item.email" :value="item.email">
                   </el-option>
@@ -137,13 +137,15 @@ export default {
   created() {
     request.get('category/tree').then(res => {
       this.categories = res.data
+      // console.log(this.categories)
     })
     request.get("/book/list").then(res => {
       this.books = res.data
+      // console.log(this.books)
     })
     request.get("/admin/list").then(res => {
       this.admin = res.data
-      console.log(this.admin)
+      // console.log(this.admin)
     })
    
 
@@ -172,9 +174,11 @@ export default {
       request.get("/book/" + book.isbn).then(res => {
         this.form = res.data
         if (this.form.category) {
-          console.log(this.form.category)
+          // console.log(this.form.category)
           this.form.categories = this.form.category.split(' > ')
+          // console.log(this.form.categories)
           console.log(this.form.categories)
+
         }
         this.$forceUpdate()
       })
